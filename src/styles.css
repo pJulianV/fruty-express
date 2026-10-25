@@ -1,1 +1,102 @@
-/* You can add global styles to this file, and also import other style files */
+:root {
+  --fx-naranja: #f29a1f;
+  --fx-naranja-oscuro: #d9820a;
+  --fx-rojo: #c8201f;
+  --fx-verde: #1fa83a;
+  --fx-verde-oscuro: #168f2f;
+  --fx-crema: #fffaf0;
+  --fx-texto: #1c2b1c;
+}
+
+/* Footer siempre abajo */
+app-root { display: flex; flex-direction: column; min-height: 100vh; }
+main { flex: 1; }
+
+body { background-color: var(--fx-crema); color: var(--fx-texto); }
+
+.bg-fx-naranja { background-color: var(--fx-naranja); }
+.bg-fx-verde { background-color: var(--fx-verde); }
+.bg-fx-rojo { background-color: var(--fx-rojo); }
+.text-fx-verde { color: var(--fx-verde-oscuro); }
+.text-fx-rojo { color: var(--fx-rojo); }
+
+.btn-fx-verde {
+  --bs-btn-color: #fff;
+  --bs-btn-bg: var(--fx-verde);
+  --bs-btn-border-color: var(--fx-verde);
+  --bs-btn-hover-color: #fff;
+  --bs-btn-hover-bg: var(--fx-verde-oscuro);
+  --bs-btn-hover-border-color: var(--fx-verde-oscuro);
+  --bs-btn-active-color: #fff;
+  --bs-btn-active-bg: var(--fx-verde-oscuro);
+  --bs-btn-active-border-color: var(--fx-verde-oscuro);
+}
+
+.btn-fx-naranja {
+  --bs-btn-color: var(--fx-texto);
+  --bs-btn-bg: var(--fx-naranja);
+  --bs-btn-border-color: var(--fx-naranja);
+  --bs-btn-hover-color: var(--fx-texto);
+  --bs-btn-hover-bg: var(--fx-naranja-oscuro);
+  --bs-btn-hover-border-color: var(--fx-naranja-oscuro);
+  --bs-btn-active-color: var(--fx-texto);
+  --bs-btn-active-bg: var(--fx-naranja-oscuro);
+  --bs-btn-active-border-color: var(--fx-naranja-oscuro);
+}
+
+/* Navbar */
+.navbar .nav-link { color: var(--fx-texto); font-weight: 600; }
+.navbar .nav-link.active { text-decoration: underline; text-underline-offset: 6px; }
+
+/* Banner con degradado (sustituye la foto) */
+.hero-fx {
+  background: linear-gradient(135deg, var(--fx-verde-oscuro), var(--fx-verde) 60%, #4cc15f);
+  border-radius: 0.75rem;
+  color: #fff;
+}
+
+/* Cajas verdes "Quiénes somos / Qué buscamos" */
+.caja-info {
+  background-color: var(--fx-verde);
+  color: #fff;
+  border-radius: 0.75rem;
+  padding: 1.25rem;
+}
+.caja-info h3 {
+  font-size: 1rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: #ffe9b8;
+}
+
+/* Tarjetas de producto: rojas (fruta) y verdes (verdura) */
+.tarjeta-producto { border: 0; border-radius: 0.75rem; color: #fff; }
+
+/* Caja blanca donde iba la foto: ahora lleva un icono */
+.caja-imagen {
+  background: #fff;
+  border-radius: 0.5rem;
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 4rem;
+}
+
+/* Miniatura en el carrito */
+.miniatura {
+  width: 48px;
+  height: 48px;
+  border-radius: 0.5rem;
+  background: #fff;
+  border: 1px solid #dee2e6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+  flex-shrink: 0;
+}
+
+/* Footer */
+.footer-fx { background-color: var(--fx-naranja); }

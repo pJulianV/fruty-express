@@ -1,0 +1,39 @@
+<!-- Banner "Tienda online" -->
+<div class="hero-fx text-center py-5 mb-4">
+  <h1 class="h2 fw-bold text-uppercase mb-0">Tienda online</h1>
+</div>
+
+<!-- Filtro: cada botón cambia el signal -->
+<div class="btn-group mb-4" role="group" aria-label="Filtrar productos">
+  <button type="button" class="btn btn-outline-success" [class.active]="filtro() === 'todas'" (click)="filtro.set('todas')">Todas</button>
+  <button type="button" class="btn btn-outline-success" [class.active]="filtro() === 'fruta'" (click)="filtro.set('fruta')">Frutas</button>
+  <button type="button" class="btn btn-outline-success" [class.active]="filtro() === 'verdura'" (click)="filtro.set('verdura')">Verduras</button>
+</div>
+
+<div class="row row-cols-1 row-cols-sm-2 row-cols-lg-4 g-4">
+  @for (producto of productos(); track producto.id) {
+    <div class="col">
+      <div class="card tarjeta-producto h-100 shadow-sm text-center p-3"
+           [class.bg-fx-rojo]="producto.categoria === 'fruta'"
+           [class.bg-fx-verde]="producto.categoria === 'verdura'">
+        <div class="caja-imagen mb-3"
+             [class.text-fx-rojo]="producto.categoria === 'fruta'"
+             [class.text-fx-verde]="producto.categoria === 'verdura'">
+          <i class="bi" [class]="'bi ' + producto.icono"></i>
+        </div>
+        <h5 class="mb-0">{{ producto.nombre }}</h5>
+        <small class="text-uppercase opacity-75">{{ producto.categoria }}</small>
+        <p class="fw-bold fs-5 my-2">
+          {{ producto.precio | currency: 'COP' : 'symbol-narrow' : '1.0-0' }}
+          <small class="fw-normal opacity-75">/ {{ producto.unidad }}</small>
+        </p>
+        <div class="d-grid gap-2 mt-auto">
+          <a [routerLink]="['/tienda', producto.id]" class="btn btn-light btn-sm">Ver más</a>
+          <button type="button" class="btn btn-fx-naranja btn-sm" (click)="agregar(producto)">
+            <i class="bi bi-plus-lg"></i> Agregar
+          </button>
+        </div>
+      </div>
+    </div>
+  }
+</div>

@@ -1,0 +1,36 @@
+<nav class="navbar navbar-expand-lg navbar-light bg-fx-naranja">
+  <div class="container">
+    <a class="navbar-brand d-flex align-items-center gap-2 fw-bold" routerLink="/">
+      <i class="bi bi-basket3-fill fs-3"></i>
+      Fruty Express
+    </a>
+
+    <!-- Botón hamburguesa: solo se ve en pantallas pequeñas -->
+    <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse" data-bs-target="#navMenu"
+            aria-controls="navMenu" aria-expanded="false" aria-label="Abrir menú">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navMenu">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/home" routerLinkActive="active">Inicio</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/tienda" routerLinkActive="active">Tienda</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/carrito" routerLinkActive="active">
+            <i class="bi bi-cart3 fs-5"></i>
+            <span class="ms-1">Carrito</span>
+            <!-- signal: se lee con paréntesis y el badge se actualiza solo -->
+            @if (carrito.cantidadTotal() > 0) {
+              <span class="badge rounded-pill bg-dark ms-1">{{ carrito.cantidadTotal() }}</span>
+            }
+          </a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
