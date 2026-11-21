@@ -1,23 +1,24 @@
-import { Injectable } from '@angular/core';
+import { inject, Injectable, signal } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { catchError, of } from 'rxjs';
+import { Producto } from '../models/producto';
 
-// Interfaz: define la "forma" que debe tener todo producto
-export interface Producto {
-  id: number;
-  nombre: string;
-  precio: number;
-  unidad: string;
-  categoria: 'fruta' | 'verdura';
-  origen: string;
-  descripcion: string;
-  icono: string; // clase de Bootstrap Icons (ej. 'bi-basket2-fill')
+interface ApiFruta {
+  name: string;
+  nutritions: {
+    calories: number;
+    sugar: number;
+  };
 }
 
 @Injectable({
   providedIn: 'root', // un único servicio compartido por toda la app
 })
 export class ProductoService {
+  private readonly http = inject(HttpClient);
+
   // Arreglo simulado: hace el papel de la respuesta de una API
-  private productos: Producto[] = [
+  private readonly productos = signal<Producto[]>([
     { id: 1, nombre: 'Manzana verde', precio: 2700, unidad: 'unidad', categoria: 'fruta', origen: 'Tolima', descripcion: 'Fruta de los campos del Tolima, de sabor fresco y ligeramente ácido.', icono: 'bi-basket2-fill' },
     { id: 2, nombre: 'Manzana gala', precio: 2700, unidad: 'unidad', categoria: 'fruta', origen: 'Tolima', descripcion: 'Dulce y jugosa, ideal para la lonchera o el postre.', icono: 'bi-basket2-fill' },
     { id: 3, nombre: 'Manzana roja', precio: 3700, unidad: 'unidad', categoria: 'fruta', origen: 'Tolima', descripcion: 'Crujiente y de sabor intenso, perfecta para comer sola.', icono: 'bi-basket2-fill' },
@@ -30,18 +31,55 @@ export class ProductoService {
     { id: 10, nombre: 'Acelga', precio: 2700, unidad: 'unidad', categoria: 'verdura', origen: 'Tolima', descripcion: 'Hortaliza de sabor suave y nutritivo, ideal para tus preparaciones.', icono: 'bi-flower1' },
     { id: 11, nombre: 'Espinaca', precio: 2700, unidad: 'unidad', categoria: 'verdura', origen: 'Tolima', descripcion: 'Hortaliza fresca de hojas tiernas, con sabor nutritivo y saludable.', icono: 'bi-flower1' },
     { id: 12, nombre: 'Cebolla cabezona', precio: 1900, unidad: 'libra', categoria: 'verdura', origen: 'Tolima', descripcion: 'Verdura de sabor fresco y característico, base de tus preparaciones.', icono: 'bi-flower3' },
-  ];
+  ]);
+
+  constructor() {
+    this.http
+      .get<ApiFruta[]>('https://www.fruityvice.com/api/fruit/all')
+      .pipe(catchError(() => of<ApiFruta[]>([])))
+      .subscribe((apiFrutas) => this.enriquecerProductos(apiFrutas));
+  }
+
+  private enriquecerProductos(apiFrutas: ApiFruta[]): void {
+    if (apiFrutas.length === 0) return;
+
+    const correspondencias: Record<string, string> = {
+      manzana: 'Apple',
+      pepino: 'Cucumber',
+      cidra: 'Lime',
+      cebolla: 'Onion',
+      espinaca: 'Spinach',
+    };
+
+    this.productos.update((productosActuales) => productosActuales.map((producto) => {
+      const nombreNormalizado = producto.nombre.toLowerCase();
+      const nombreApi = Object.entries(correspondencias).find(([clave]) =>
+        nombreNormalizado.includes(clave),
+      )?.[1];
+      const frutaApi = apiFrutas.find(
+        (fruta) => fruta.name.toLowerCase() === nombreApi?.toLowerCase(),
+      );
+
+      return frutaApi
+        ? {
+            ...producto,
+            calorias: frutaApi.nutritions.calories,
+            azucar: frutaApi.nutritions.sugar,
+          }
+        : producto;
+    }));
+  }
 
   getProductos(): Producto[] {
-    return this.productos;
+    return this.productos();
   }
 
   // Devuelve el producto o undefined si el id no existe
   getProductoById(id: number): Producto | undefined {
-    return this.productos.find((p) => p.id === id);
+    return this.productos().find((p) => p.id === id);
   }
 
   getPorCategoria(categoria: Producto['categoria']): Producto[] {
-    return this.productos.filter((p) => p.categoria === categoria);
+    return this.productos().filter((p) => p.categoria === categoria);
   }
 }

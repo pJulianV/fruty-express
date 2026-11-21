@@ -1,7 +1,8 @@
 import { Component, OnInit, inject } from '@angular/core';
 import { CurrencyPipe } from '@angular/common';
 import { ActivatedRoute, RouterLink } from '@angular/router';
-import { Producto, ProductoService } from '../services/producto';
+import { Producto } from '../models/producto';
+import { ProductoService } from '../services/producto';
 import { CarritoService } from '../services/carrito';
 
 @Component({

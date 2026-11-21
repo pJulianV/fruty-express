@@ -30,6 +30,12 @@
               <tr><th scope="row">Origen</th><td>{{ producto.origen }}</td></tr>
               <tr><th scope="row">Unidad</th><td>{{ producto.unidad }}</td></tr>
               <tr><th scope="row">Descripción</th><td>{{ producto.descripcion }}</td></tr>
+              @if (producto.calorias !== undefined) {
+                <tr><th scope="row">Calorías</th><td>{{ producto.calorias }} kcal</td></tr>
+              }
+              @if (producto.azucar !== undefined) {
+                <tr><th scope="row">Azúcar</th><td>{{ producto.azucar }} g</td></tr>
+              }
             </tbody>
           </table>
 
