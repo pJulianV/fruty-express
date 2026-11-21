@@ -1,20 +1,18 @@
 import { Component, computed, inject, signal } from '@angular/core';
-import { CurrencyPipe } from '@angular/common';
-import { RouterLink } from '@angular/router';
-import { Producto, ProductoService } from '../services/producto';
-import { CarritoService } from '../services/carrito';
+import { Producto } from '../models/producto';
+import { ProductoService } from '../services/producto';
+import { ProductoCard } from '../producto-card/producto-card';
 
 type Filtro = 'todas' | 'fruta' | 'verdura';
 
 @Component({
   selector: 'app-tienda',
-  imports: [RouterLink, CurrencyPipe],
+  imports: [ProductoCard],
   templateUrl: './tienda.html',
   styleUrl: './tienda.css',
 })
 export class Tienda {
   private productoService = inject(ProductoService);
-  private carrito = inject(CarritoService);
 
   // signal: guarda el filtro elegido; al cambiarlo, la lista se recalcula
   filtro = signal<Filtro>('todas');
@@ -24,7 +22,4 @@ export class Tienda {
     return f === 'todas' ? this.productoService.getProductos() : this.productoService.getPorCategoria(f);
   });
 
-  agregar(producto: Producto): void {
-    this.carrito.agregar(producto);
-  }
 }
