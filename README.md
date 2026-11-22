@@ -79,9 +79,9 @@ src/app/
 
 | Integrante | Parte |
 |---|---|
-| Integrante 1 | Navbar y Home |
-| Integrante 2 | Tienda y ProductoDetalle |
-| Integrante 3 | Carrito, rutas y Bootstrap |
+| Dilan Castro | Navbar y Home |
+| Jhonnatan Mayorga | Tienda y ProductoDetalle |
+| Julian Vargas | Carrito, rutas, Bootstrap, ProductoCard, interfaz y API |
 
 ## Flujo de trabajo en equipo
 
@@ -107,16 +107,16 @@ La fase final agrega una tarjeta reutilizable de producto, una interfaz comparti
 
 | Archivo | Nuevo o modificado | Qué hace | Quién lo hizo |
 |---|---|---|---|
-| `src/app/models/producto.ts` | Nuevo | Define la interfaz `Producto` y sus campos opcionales de calorías y azúcar. | pJulianV |
-| `src/app/producto-card/producto-card.ts` | Nuevo | Recibe un `Producto` con `input()` y se comunica con `CarritoService`. | pJulianV |
-| `src/app/producto-card/producto-card.html` | Nuevo | Muestra el producto, el precio COP y los botones de detalle y carrito. | pJulianV |
-| `src/app/producto-card/producto-card.css` | Nuevo | Ajusta la altura reutilizable de la tarjeta dentro de la cuadrícula. | pJulianV |
-| `src/app/tienda/tienda.ts` | Modificado | Usa el servicio de productos y elimina la lógica directa de agregar al carrito. | pJulianV |
-| `src/app/tienda/tienda.html` | Modificado | Renderiza las tarjetas con `@for` y el componente `<app-producto-card>`. | pJulianV |
-| `src/app/services/carrito.ts` | Modificado | Importa `Producto` desde el modelo propio en vez de desde el servicio. | pJulianV |
-| `src/app/services/producto.ts` | Modificado | Usa el modelo compartido, conserva los 12 productos mock y consulta datos de Fruityvice. | pJulianV |
-| `src/app/app.config.ts` | Modificado | Registra `provideHttpClient()` para permitir llamadas HTTP desde Angular. | pJulianV |
-| `src/app/producto-detalle/` | Modificado | Importa el modelo compartido y muestra calorías y azúcar cuando están disponibles. | pJulianV |
+| `src/app/models/producto.ts` | Nuevo | Define la interfaz `Producto` y sus campos opcionales de calorías y azúcar. | Julian Vargas |
+| `src/app/producto-card/producto-card.ts` | Nuevo | Recibe un `Producto` con `input()` y se comunica con `CarritoService`. | Julian Vargas |
+| `src/app/producto-card/producto-card.html` | Nuevo | Muestra el producto, el precio COP y los botones de detalle y carrito. | Julian Vargas |
+| `src/app/producto-card/producto-card.css` | Nuevo | Ajusta la altura reutilizable de la tarjeta dentro de la cuadrícula. | Julian Vargas |
+| `src/app/tienda/tienda.ts` | Modificado | Usa el servicio de productos y elimina la lógica directa de agregar al carrito. | Julian Vargas |
+| `src/app/tienda/tienda.html` | Modificado | Renderiza las tarjetas con `@for` y el componente `<app-producto-card>`. | Julian Vargas |
+| `src/app/services/carrito.ts` | Modificado | Importa `Producto` desde el modelo propio en vez de desde el servicio. | Julian Vargas |
+| `src/app/services/producto.ts` | Modificado | Usa el modelo compartido, conserva los 12 productos mock y consulta datos de Fruityvice. | Julian Vargas |
+| `src/app/app.config.ts` | Modificado | Registra `provideHttpClient()` para permitir llamadas HTTP desde Angular. | Julian Vargas |
+| `src/app/producto-detalle/` | Modificado | Importa el modelo compartido y muestra calorías y azúcar cuando están disponibles. | Julian Vargas |
 
 ### Interfaces y servicios
 
