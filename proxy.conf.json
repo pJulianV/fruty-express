@@ -1,0 +1,9 @@
+{
+  "/fruityvice": {
+    "target": "https://www.fruityvice.com",
+    "changeOrigin": true,
+    "pathRewrite": {
+      "^/fruityvice": "/api"
+    }
+  }
+}

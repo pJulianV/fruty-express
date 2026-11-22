@@ -35,7 +35,7 @@ export class ProductoService {
 
   constructor() {
     this.http
-      .get<ApiFruta[]>('https://www.fruityvice.com/api/fruit/all')
+      .get<ApiFruta[]>('/fruityvice/fruit/all')
       .pipe(catchError(() => of<ApiFruta[]>([])))
       .subscribe((apiFrutas) => this.enriquecerProductos(apiFrutas));
   }
